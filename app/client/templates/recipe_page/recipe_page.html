@@ -1,0 +1,61 @@
+<template name="RecipePage">
+{{#if Template.subscriptionsReady}}
+	<div class="recipe-page">
+		
+		<div class="recipeTitle">
+			<div id="title">
+				<h2>{{title}}</h2>
+			</div>
+			
+		</div>
+	<div class="recipeMain">
+		
+		<div class="recipeItem">
+			{{#if hasTime}}
+				<h3>Takes:</h3><p>{{prepTime}}</p>
+			{{else}}
+				<!-- <button id="addTakes" class="addBtn">Add cooking time</button> -->
+			{{/if}}
+		</div>
+		
+		<div class="recipeItem">
+			{{#if hasServings}}
+				<hr class="divider">
+				<h3>Serves:</h3><p>{{servings}}</p>
+			{{else}}
+				<!-- <button id="addServings" class="addBtn">Add servings</button> -->
+			{{/if}}
+		</div>
+		<hr class="divider">
+		<div class="recipeIngredients">
+			<div class="recipeItem">
+				<h3>Ingredients</h3>
+			</div>
+				{{#each ingredient}}
+					<p>
+						<span class="ingredient-listing">{{amount}}</span>
+						<span class="ingredient-listing">{{measurement}}</span>
+						<span class="ingredient-listing">{{name}}</span>
+					</p>
+				{{/each}}			
+		</div>
+		<hr class="divider">
+		<div class="recipeDirections">
+		<div class="recipeItem">
+				<h3>Directions</h3>
+			</div>
+			<table id="directions">
+				{{#each getDirections}}
+					<tr id="step_{{step}}">
+						<td id="step">{{step}}.</td>
+						<td id="task">{{task}}</td>
+					</tr>
+				{{/each}}
+			</table>
+		</div>
+		
+	</div>
+		{{> CommentsList}}
+	</div>
+{{/if}}
+</template>

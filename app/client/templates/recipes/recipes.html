@@ -1,0 +1,29 @@
+<template name="Recipes">
+  		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					{{{getHeader}}}
+					{{#if hasRecipe}}
+						{{#each recipe}}
+							{{countRecipe}}
+							{{#if newRow}}
+<!-- 								<div class="row">
+ -->							{{/if}}
+							<div class="col-xs-6 col-md-4">
+								{{>DisplayRecipe}}
+							</div>
+							{{#if newRow}}
+<!-- 								</div>
+ -->						{{/if}}
+
+							
+						{{/each}}
+					{{else}}
+						{{#if filterSet}}
+							<h3 class="filterby">No recipes found</h3>
+						{{/if}}
+					{{/if}}
+				</div>
+			</div>
+		</div>
+</template>

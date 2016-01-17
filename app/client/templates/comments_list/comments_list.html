@@ -1,0 +1,32 @@
+<template name="CommentsList">
+  <div class="comments">
+  <h3>Comments</h3>
+	<form class="new_comment" id="new_comment">
+		<textarea name="body"></textarea>
+
+		<!-- <button id="addCommentBtn" class="btn">Add Comment</button> -->
+		<input id="addCommentBtn" type="submit" class="btn" value="Add Comment">
+	</form>
+	<ul >
+		{{#each comments}}	
+			<li class="comment">
+				<div class="body">
+					{{body}}
+				</div>
+				<div class="user">
+					{{user.profile.name}} - {{timestamp}}
+				</div>
+			</li>	
+
+		{{else}}
+			<li class="comment">No comments.</li>
+
+		{{/each}}
+			<a href="comments" id="comments">
+				<input id="loadComments" type="submit" class="btn" value="Load More">
+			</a>
+		
+	</ul>	
+  </div>
+  
+</template>

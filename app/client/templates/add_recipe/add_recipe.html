@@ -1,0 +1,76 @@
+<template name="AddRecipe">
+		<div class="add_recipe">
+			<form id="recipe_info" name="recipe_info" role="form" class="inline">
+			<div class="form-group">
+				<label for="title">Title</label>
+				<input type="text" id="addTitle" class="form-control"/>
+			</div>
+			<div class="form-data left">
+				<div class="form-group">
+				<label for="category">Category</label>
+					<select id="addCategoryId" class="form-control">
+						<option label=""></option>
+						{{#each category}}
+							{{#if displayCategory}}
+							<option value="{{catId}}">{{name}}</option>
+							{{/if}}
+
+						{{/each}}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="author">Author</label>
+					<input type="text" id="addAuthor" class="form-control" placeholder="Author" />
+				</div>
+			</div>
+
+			<div class="form-data right">
+				<div class="form-group ">
+					<label for="prepTime">Prep Time</label>
+					<input type="text" id="addPrepTime" class="form-control" />
+						
+				</div>
+				<div class="form-group">
+					<label for="servings">Servings</label>
+					<input type="text" id="addServings" class="form-control" />
+				</div>
+				
+			</div>
+			
+			<div class="form-group">
+				<h3>Directions</h3>
+				<div class="form-group directions">
+						<input type="text" id="directions_step" class="form-control listed" placeholder="Add a step"/>
+						<span id="add_step" name="add_step" class="glyphicon glyphicon-plus-sign"></span>	
+
+						<div id="directionsList">
+							<table id="directionsTable" class="recipe-table" colspan="4" rowspan="4">
+							
+							</table>
+						</div>
+						
+				</div>
+			</div>
+				<div id="ingredients">
+					<h3>Add Ingredients</h3>
+				</div>
+				<div class="form-group ingredients">
+						<input id="ingredient_amount" type="text" class="form-control listed" placeholder="Amount">
+
+						<input id="ingredient_name" type="text" class="form-control listed" placeholder="Ingredient Name">
+						<span id="add_ingredient" name="add_ingredient" class="glyphicon glyphicon-plus-sign"></span>					
+				</div>
+
+				<div id="ingredientsList" class="form-group">
+						<table id="ingredients_list" class="recipe-table">
+									
+						</table>						
+				</div>
+				
+				<input name="submitRecipe" type="submit" value="Add Recipe">
+			</form>
+
+			<!-- add seperate from for ingredients, with a text input for name and a slector for measurements and type for rest -->
+			
+		</div>
+</template>

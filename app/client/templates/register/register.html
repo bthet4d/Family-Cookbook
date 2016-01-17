@@ -1,0 +1,28 @@
+<template name="Register">
+<!-- todo make into modal -->
+<a class="btn btn-default" data-toggle="modal" href="#loginModal" data-target="#loginModal">Custom Log In</a> 
+<div class="modal-fade" id="loginModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" data-target="#loginModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Login</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form">
+					<div class="form-group">
+						<input class="form-control" type="button" id="logInWithFacebook" name="logInWithFacebook" value="Log in with Facebook">
+					  	<input lass="form-control" type="text" id="registerUserName" name="registerUserName" placeholder="User Name">
+					  	<input lass="form-control" type="email" id="registerEmail" name="registerEmail" placeholder="Email">
+					  	<input lass="form-control" type="password" id="registerPassword" name="registerPassword" placeholder="Password">
+					  	<input type="button" id="logIn" value="Login" data-dismiss="modal">
+					  	<input type="button" id="createAccount" value="Create Account" data-dismiss="modal">
+					</div>
+					
+				  </form>
+			</div>
+		
+		  </div>
+	  </div>	
+  </div>
+</template>

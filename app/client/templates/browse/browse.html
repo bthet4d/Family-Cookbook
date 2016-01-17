@@ -1,0 +1,28 @@
+<template name="Browse">
+		
+
+		<div class="tab-content">
+		<ul class="nav nav-tabs"> 
+			<li id="category" class="tabHeader active"><a href="#browseCategory" data-toggle="tab">Category</a></li>
+			<li id="ingredient" class="tabHeader"><a href="#browseIngredients" data-toggle="tab"> Ingredients</a></li>
+		</ul>
+			<div role="tabpanel" class="tab-pane active" id="browseCategory">
+				<ul class="list-group">
+					{{#each categories}}
+						<li class="list-group-item category">
+							<a href="#">{{name}}</a>
+						</li>
+					{{/each}}
+				</ul>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="browseIngredients">
+				<ul class="list-group">
+					{{#each ingredients}}
+						<li id="{{_id}}" class="list-group-item ingredient">
+							<a href="#">{{name}}</a>
+						</li>
+					{{/each}}
+				</ul>
+			</div>
+		</div>
+</template>

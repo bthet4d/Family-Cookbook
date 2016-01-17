@@ -1,0 +1,48 @@
+<template name="MasterLayout">
+<link href='http://fonts.googleapis.com/css?family=Fjord+One' rel='stylesheet' type='text/css'>
+	<div class="container">
+	<!-- <div class="header">
+		<h2 class="title-container">
+			Thetford Family Cookbook
+		</h2>
+					
+	</div> -->
+		{{> NavBar}}
+		<div class="row">
+			<!-- <div class="col-lg-12"> -->
+				
+			<!-- </div> -->
+		</div>
+		
+		
+		{{#if currentUser}}
+		<div class="row main">
+			<div class="col-sm-3 sidebar">
+				{{> yield 'images'}}
+				{{> yield 'browse'}}
+				<!-- conversations incomplete -->
+				<!-- {{> yield 'conversations'}} -->
+			</div>
+			
+							
+			<div class="col-sm-9 content">
+				{{> yield}}
+			</div>
+		</div>
+
+		{{else}}
+			<div class="row">
+				<div class="recipe-logo">
+					<div class="image-container">
+						<img src="images/recipeLogo.png">
+					</div>
+				</div>
+			</div>
+
+		{{/if}}
+
+			
+
+	</div>
+	  		
+</template>

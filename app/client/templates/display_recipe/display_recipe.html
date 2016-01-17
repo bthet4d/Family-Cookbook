@@ -1,0 +1,47 @@
+<template name="DisplayRecipe">
+	{{#if Template.subscriptionsReady}}
+		<div class="display-recipe">
+				<div class="row recipe-row">
+					<div class="col-xs-6 recipe-column">
+				
+						{{#if isFavorite}}
+							{{> RemoveFavoritesButton self = getContext}}
+						{{else}}
+							{{> FavoritesButton self= getContext}}
+						{{/if}}
+						<div class="recipeItem" id="recipeTitle" data-id="{{_id}}">
+							<h4>{{title}}</h4>
+						</div>
+					</div>
+					
+				  	<!-- </div> -->
+				  	<div class="col-xs-6 recipe-column">
+				  	{{> DisplayImage recipeId = getId}}
+				  	</div>
+			  	</div>
+			  	<div class="row recipe-row">
+			  		<div class="recipe-data">
+			  			<div class="recipeItem">
+							<p>by: <span id="recipeAuthor">{{author}} </span></p>
+						</div>
+						{{#if hasPrepTime}}
+							<div class="recipeItem" id="recipePrepTime">
+								<h5>Takes:</h5> <p>{{prepTime}}</p>
+							</div>
+						{{/if}}
+						{{#if hasServings}}
+					  	<div class="recipeItem" id="recipeServings">
+					  		<h5>Serves:</h5> 
+					  		<p>{{servings}}</p>
+					  	</div>
+					  	{{/if}}
+					  	<div class="recipeItem ingredientsList">
+					  		<h5>Ingredients:</h5>
+					  		<p>{{getIngredientsList}}</p>
+					  		
+					  	</div>
+				  	</div>
+			  	</div>
+		</div>
+	{{/if}}
+</template>

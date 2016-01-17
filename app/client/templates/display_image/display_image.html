@@ -1,0 +1,13 @@
+<template name="DisplayImage">
+	<div class="recipePhoto">
+		{{#if hasImage}}
+			{{{displayImage}}}
+
+		{{else}}
+		<label for="uploadPhoto" class="glyphicon glyphicon-upload uploadLabel"></label>
+		<input id="uploadPhoto" type="file">
+
+
+		{{/if}}
+	</div>
+</template>
