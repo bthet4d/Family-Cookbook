@@ -12,11 +12,6 @@ Meteor.publish('recipes', function (/* args */) {
 Meteor.publish('singleRecipe', function(recipeId){
 	if(!this.userId) return this.ready();
 	return Recipes.find({_id: recipeId});
-
-	// return [
-	// 	Recipes.findOne({_id: recipeId}),
-	// 	Comments.find({recipeId: recipeId}, {sort: {createdAt: -1}})
-	// 	];
 });
 
 
@@ -50,11 +45,6 @@ Meteor.publish('recipeByIngredient', function(filterIngredients){
 Meteor.publish('categories', function(){
 	if(!this.userId) return this.ready();
 	return Categories.find();
-});
-
-Meteor.publish('test_collection', function(){
-	if(!this.userId) return this.ready();
-	return TestCollection.find();
 });
 
 Meteor.publish('comments', function(recipeId){

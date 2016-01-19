@@ -6,17 +6,9 @@
 					{{#if hasRecipe}}
 						{{#each recipe}}
 							{{countRecipe}}
-							{{#if newRow}}
-<!-- 								<div class="row">
- -->							{{/if}}
 							<div class="col-xs-6 col-md-4">
 								{{>DisplayRecipe}}
 							</div>
-							{{#if newRow}}
-<!-- 								</div>
- -->						{{/if}}
-
-							
 						{{/each}}
 					{{else}}
 						{{#if filterSet}}

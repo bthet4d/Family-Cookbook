@@ -5,15 +5,9 @@ CategoriesController = RouteController.extend({
   waitOn: function(){
     Meteor.subscribe('categories');
     Meteor.subscribe('recipes');
-    // Meteor.subscribe('favorite_recipes', Meteor.userId());
   },
   data: function(){
     catId = parseInt(this.params.catId);
-    // console.log(catId);
-    // recipesByCategory = {
-    //   recipes: Recipes.find({categoryId: catId})
-    // }
-    
     // return recipesByCategory;
     return {
       button: 'addRecipe',
@@ -29,8 +23,7 @@ CategoriesController = RouteController.extend({
     //catId specified
     this.render('ViewCategory');
     this.render('DisplayPopular', {to: "popular"});
-        this.render('BrowseCategories', {to: 'browseCategory'});
-    // this.render('BrowseIngredients', {to: 'browseIngredient'});
+    this.render('BrowseCategories', {to: 'browseCategory'});
     this.render('BrowseButtons', {to: 'browseButtons'});
 
   }

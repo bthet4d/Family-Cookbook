@@ -4,8 +4,7 @@ AddRecipeController = RouteController.extend({
   },
 
   data: function () {
-    // return a global data context like this:
-    // Items.findOne({_id: this.params._id});
+    
   },
 
   action: function () {
@@ -13,6 +12,5 @@ AddRecipeController = RouteController.extend({
     // this.render('DisplayPopular', {to: "popular"});
     this.render('BrowseButtons', {to: 'browseButtons'});
     this.render('BrowseCategories', {to: 'browseCategory'});
-    // this.render('BrowseIngredients', {to: 'browseIngredient'});
   }
 });

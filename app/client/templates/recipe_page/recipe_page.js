@@ -47,7 +47,6 @@ Template.RecipePage.created = function () {
 	var recipeId = Router.current().params.recipeId;
     instance.subscribe('singleRecipe', recipeId);
     instance.subscribe('comments', recipeId);
-    // var recipe = Recipes.findOne({_id: });
     instance.autorun(function(){
     	var singleRecipe = Recipes.findOne({_id: recipeId});
     	instance.recipe = new ReactiveVar(singleRecipe);

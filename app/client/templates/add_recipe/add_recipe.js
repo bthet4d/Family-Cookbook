@@ -23,13 +23,15 @@ Template.AddRecipe.events({
 		$('#ingredient_amount').val('');
 		//show ingrendients
 		$('#ingredientsList').css('display: inline');
+		//remove the invalid entry class
+		$('#ingredient_name').removeClass('invalid-entry');
+		$('#ingredient_amount').removeClass('invalid-entry');
 		// ing = {
 		// 	name: name,
 		// 	amount: amount,
 			
 		// }
 		// ingredients.push(ing);
-		// console.log(ingredients);
 	},
 
 	'click [name=add_step]':function(e){
@@ -49,24 +51,73 @@ Template.AddRecipe.events({
 			);
 		
 		$("#directions_step").val('');
+		//remove invalid entry class
+		$('#directions_step').removeClass('invalid-entry');
 		//increment step number
 		Template.instance().step.set(Template.instance().step.get() + 1);
 	},
 
 	'click [name=submitRecipe]':function(e){
 		e.preventDefault();
-		var title = $("#addTitle").val();
+		var validForm = true;
+		//submission by enter currently prevented
+		if(e.keyCode == 13){
+			validForm = false;
+		}
+		var title = $("#addTitle").val().toLowerCase();
 		var prepTime = $("#addPrepTime").val();
 		var servings = $("#addServings").val();
 		var categoryId = $("#addCategoryId").val();
-		var author = $('#addAuthor').val();
+		var author = $('#addAuthor').val().toLowerCase();
 		var stepPlain = 1;
+		
+		//if the title, author or category are emmpty, prevent submission
+		if(title === ''){
+			validForm = false;
+			$('#addTitle').addClass('invalid-entry');
+		}else{
+			$('#addTitle').removeClass('invalid-entry');
+		}
+		if(author === ''){
+			validForm = false;
+			$('#addAuthor').addClass('invalid-entry');
+		}else{
+			$('#addAuthor').removeClass('invalid-entry');
+		}
+
+		if(categoryId === ''){
+			validForm = false;
+			$('#addCategoryId').addClass('invalid-entry');
+		}else{
+			$('#addCategoryId').removeClass('invalid-entry');
+		}
+
+		var directionsCount = document.getElementById('directionsTable').getElementsByTagName('tr').length;
+		var ingredientsCount = document.getElementById('ingredients_list').getElementsByTagName('tr').length;
+		
+		if(!directionsCount){
+			validForm = false;
+			$("#directions_step").addClass('invalid-entry');
+		}else{
+			$("#directions_step").removeClass('invalid-entry');
+		}
+
+		if(!ingredientsCount){
+			validForm = false;
+			$('#ingredient_name').addClass('invalid-entry');
+			$('#ingredient_amount').addClass('invalid-entry');
+		}else{
+			$('#ingredient_name').removeClass('invalid-entry');
+			$('#ingredient_amount').removeClass('invalid-entry');
+		}
+
+
 		$('#directionsTable tr').each(function(){
 			$(this).find('td').each(function(){
 				if($(this).attr('id') === 'task'){
 					directions.push({
 						step: stepPlain,
-						task: $(this).text()
+						task: $(this).text().toLowerCase()
 					});
 				}
 			});
@@ -82,7 +133,7 @@ Template.AddRecipe.events({
 				$(this).find('span').each(function(){
 					var id = (this).getAttribute('id');
 					if(id === 'name'){
-						name = $(this).context.innerHTML;
+						name = $(this).context.innerHTML.toLowerCase();
 					}else if(id === 'amount'){
 						amount = $(this).context.innerHTML;
 					}
@@ -93,24 +144,9 @@ Template.AddRecipe.events({
 				amount: amount
 			}
 			ingredients.push(ing);
-	
-			
-			//search by ingredient, multiple/or relationship
-			//Recipes.find({ingredients: {$elemMatch: {name: {$in: ['Ground turkey', 'turkey bacon']}}}}).fetch();
 		});
-
-		// if(false
-		// 	categoryId === '' 
-		// 	|| title === '' 
-		// 	|| prepTime === '' 
-		// 	|| servings === '' 
-		// 	|| directions.length === 0 
-		// 	|| ingredients.length === 0
-		// ){
-		if(false){
-			alert('You missed a field');
-		
-		}else{
+		//todo -add validation to form and disable submit on enter
+	
 			// insert into Recipes Collection
 			var recipe = {
 				categoryId: parseInt(categoryId),
@@ -121,17 +157,18 @@ Template.AddRecipe.events({
 				directions: directions,
 				ingredients: ingredients
 			};
-			// todo - loop over incredients array and push each to an ingredients collection
-			//
-			for(ing in ingredients){
-				var ingToAdd = ingredients[ing].name;
-				//todo check if there are similar ingredients
-				var similarIngredients = Ingredients.find({name: '/' + ingToAdd + '/'}).fetch();
-				Meteor.call('insertIngredient', ingToAdd);
+			// ingredients not currently saved or used as a filter
+			// moved to a search feature
+			// for(ing in ingredients){
+			// 	var ingToAdd = ingredients[ing].name;
+			// 	//todo check if there are similar ingredients
+			// 	var similarIngredients = Ingredients.find({name: new RegExp(ingToAdd)}).fetch();
+			// 	Meteor.call('insertIngredient', ingToAdd);
+			// }
+			if(validForm){
+				Meteor.call('addOriginalRecipe', recipe);
 			}
-
-			// Meteor.call('addOriginalRecipe', recipe);
-		}
+			
 	},
 
 	'click [class="removeTask"]': function(e){
@@ -139,6 +176,9 @@ Template.AddRecipe.events({
 		e.preventDefault();
 		$(e.currentTarget).parent().parent().remove();
 	},
+	'change [class="form-control invalid-entry"]': function(e){
+		$(e.currentTarget).removeClass('invalid-entry');
+	}
 });
 
 /*****************************************************************************/
@@ -167,6 +207,7 @@ Template.AddRecipe.helpers({
 Template.AddRecipe.created = function () {
 	var instance = this;
 	instance.step = new ReactiveVar(1);
+	instance.subscribe('ingredients');
 };
 
 Template.AddRecipe.rendered = function () {

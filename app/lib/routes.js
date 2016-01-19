@@ -14,8 +14,6 @@ Router.route('/', {
   where: 'client'
 });
 
-
-
 Router.route('/addRecipe',{
   name: 'addRecipe',
   controller: 'AddRecipeController',

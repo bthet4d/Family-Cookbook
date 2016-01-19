@@ -4,20 +4,12 @@
 Template.DisplayRecipe.events({
 	'click [id=recipeTitle]':function(e){
 		e.preventDefault();
-		// recipeId = $(this).data('id');
 		var recipeId = this._id;
 		window.location.assign('/recipe/' + recipeId);
 		
 	},
-	'click [id=addFavorites]': function(){
-		// FavoriteRecipes.insert({
-		// 	user: Meteor.userId(),
-		// 	recipeId: this._id
-		// });
-	},
 	'click [id=favoriteButton]': function(e){
 		e.preventDefault();
-		console.log('add to favorites');
 		var selectedButton = e.currentTarget;
 		var action = $(selectedButton).data('action');
 		var recipeId = $(selectedButton).data('id');
@@ -38,11 +30,8 @@ Template.DisplayRecipe.events({
 		}
 	},
 	'change [id="uploadPhoto"]': function(e){
-		console.log(this);
 		var files = event.target.files;
 		var recipeId = this.recipeId;
-		console.log('recipeid');
-		console.log(recipeId);
 		for(var i = 0, ln = files.length; i < ln; i++){
 			files[i].recipeId = this._id;
 
@@ -63,7 +52,6 @@ Template.DisplayRecipe.events({
 /*****************************************************************************/
 Template.DisplayRecipe.helpers({
 	isFavorite: function(){
-			//todo - fix logig
 		var isRecipe = FavoriteRecipes.findOne({recipeId: this._id, user: Meteor.userId()});
 
 		if(isRecipe && isRecipe.isFavorite){

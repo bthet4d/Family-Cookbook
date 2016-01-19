@@ -4,8 +4,6 @@
 Template.FavoritesButton.events({
 	'click [id="addToFavorites"]': function(e){
 		e.preventDefault();
-		console.log('add to favorites');
-		console.log($(this));
 		var user = Meteor.userId();
 		var recipeId = this.self;
 		//add class

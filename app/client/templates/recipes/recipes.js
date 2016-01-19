@@ -32,18 +32,6 @@ Template.Recipes.helpers({
 		}else if(active === 'ingredient'){
 			$('#browseIngredient').addClass('active');
 		}
-	},
-	countRecipe: function(){
-
-		recipeCount++;
-		if(recipeCount % 3 === 0){
-			Session.set('newRow', true);
-		}else{
-			Session.set('newRow', false);
-		}
-	},
-	newRow: function(){
-		return Session.get('newRow');
 	}
 });
 
@@ -55,7 +43,6 @@ Template.Recipes.created = function () {
 	hasFilters = new ReactiveVar(false);
 	header = new ReactiveVar('');
 	recipesToView = new ReactiveVar();
-	recipeCount = 0;
 	instance.subscribe('recipes');
 	instance.subscribe('favorite_recipes');
 	
@@ -63,12 +50,10 @@ Template.Recipes.created = function () {
 	instance.autorun(function(){
 		if(Session.get('viewRecipes').collection === 'all'){
 			header.set('All Recipes');
-			recipeCount = 0;
 			recipesToView.set(Recipes.find());
 		}else if(Session.get('viewRecipes').collection === 'favorites'){
 			header.set('My Favorites');
 			//todo filter recipesToView on the client
-			recipeCount = 0;
 			var favs = FavoriteRecipes.find({user: Meteor.userId(), isFavorite: 1}, {fields: {recipeId: 1}}).fetch();
 			var favoriteIds = [];
 		  	for(info in favs){
@@ -92,7 +77,6 @@ Template.Recipes.created = function () {
 				header.set('Add a filter');
 				hasFilters.set(false);
 			}
-			
 			recipesToView.set(Recipes.find({}, {ingredients: {$elemMatch: {name: {$all: filterIngredients}}}}));
 		}
 	});

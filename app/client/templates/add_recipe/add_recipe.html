@@ -3,24 +3,21 @@
 			<form id="recipe_info" name="recipe_info" role="form" class="inline">
 			<div class="form-group">
 				<label for="title">Title</label>
-				<input type="text" id="addTitle" class="form-control"/>
+				<input type="text" id="addTitle" class="form-control" required/>
 			</div>
 			<div class="form-data left">
 				<div class="form-group">
 				<label for="category">Category</label>
-					<select id="addCategoryId" class="form-control">
+					<select id="addCategoryId" class="form-control" required>
 						<option label=""></option>
 						{{#each category}}
-							{{#if displayCategory}}
 							<option value="{{catId}}">{{name}}</option>
-							{{/if}}
-
 						{{/each}}
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="author">Author</label>
-					<input type="text" id="addAuthor" class="form-control" placeholder="Author" />
+					<input type="text" id="addAuthor" class="form-control" placeholder="Author" required/>
 				</div>
 			</div>
 

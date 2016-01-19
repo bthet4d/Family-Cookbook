@@ -26,8 +26,6 @@ Meteor.methods({
       }else{
          return false;
       }
-
-
    },
    'addOriginalRecipe': function(recipe){
       if(this.isSimulation){
@@ -61,9 +59,6 @@ Meteor.methods({
             isFavorite: 0
          }});
       }
-      
-
-      
    },
    'addToFavorites': function(recipeId, userId){
       if(this.isSimulation){
