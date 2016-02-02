@@ -113,6 +113,24 @@ Template.DisplayRecipe.helpers({
 			}
 		});
 		return ingList;
+	},
+	getAuthor: function(){
+		var tempName = '';
+		var tempNameArray = this.author.split(' ');
+		tempNameArray.forEach(function(name, index){
+			tempNameArray[index] = name.charAt(0).toUpperCase() + name.substr(1);
+			// tempNameArray[index] = capName;
+		});
+		return tempNameArray.join(' ');
+	
+	},
+	getTitle: function(){
+		var tempTile = '';
+		var tempTileArray = this.title.split(' ');
+		tempTileArray.forEach(function(title, index){
+			tempTileArray[index] = title.charAt(0).toUpperCase() + title.substr(1);
+		});
+		return tempTileArray.join(' ');
 	}
 });
 
@@ -122,6 +140,7 @@ Template.DisplayRecipe.helpers({
 Template.DisplayRecipe.created = function () {
 	var instance = this;
 	var recipeId = this.data._id;
+	
 	instance.subscribe('favorite_recipes');
 	instance.subscribe('RecipePhotos', recipeId);
 	instance.subscribe('images');

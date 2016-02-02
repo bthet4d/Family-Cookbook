@@ -39,7 +39,13 @@ Template.MasterLayout.events({
 					},
 					{author: regExp},
 					{title: regExp}
-				]}).fetch()
+				]}).fetch();
+			
+			Session.set('viewRecipes',{
+				collection: 'search',
+				searchVal: searchValue
+			});
+			//todo - set Session view recipes to all
 		}
 		
 	}

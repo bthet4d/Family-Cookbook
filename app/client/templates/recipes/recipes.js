@@ -78,6 +78,20 @@ Template.Recipes.created = function () {
 				hasFilters.set(false);
 			}
 			recipesToView.set(Recipes.find({}, {ingredients: {$elemMatch: {name: {$all: filterIngredients}}}}));
+		}else if(Session.get('viewRecipes').collection === 'search'){
+			var searchText = Session.get('viewRecipes').searchVal;
+			var regExp = new RegExp(searchText);
+			var searchedRecipes = Recipes.find(
+				{$or: [
+					{ingredients: 
+						{$elemMatch: 
+							{name: regExp}
+						}
+					},
+					{author: regExp},
+					{title: regExp}
+				]});
+			recipesToView.set(searchedRecipes);
 		}
 	});
 	
