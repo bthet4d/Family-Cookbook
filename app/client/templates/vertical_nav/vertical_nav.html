@@ -1,0 +1,40 @@
+<template name="VerticalNav">
+		<ul class="sidebar-nav">
+				
+			
+		  	<li id="allRecipes" class="">
+		  		<a href="/recipes" data-toggle="tooltip" title="All Recipes" data-placement="right"><img id="menu-icon" class="img-responsive" src="/images/menu_black_64.png" /></a>		  	
+		  	</li>
+
+		  	<!-- <li id="categories" class="vertical-navbar-component">
+		  	<a href="/recipes">
+		  		<img id="plate-icon" class="img-responsive" src="/images/dinnerPlate.png">
+		  	</a>
+		  		
+		  	</li> -->
+		  	<li id="MyFavorites" class="vertical-navbar-component"><a href="/recipes" data-toggle="tooltip" title="My Favorites" data-placement="right"><span class="glyphicon glyphicon-heart navheart"></span></a></li>
+
+		  	<li id="popular" class="vertical-navbar-component"><a href="/recipes" data-toggle="tooltip" title="Popular Recipes" data-placement="right"><span class="glyphicon glyphicon-star"></span></a></li>
+
+		  	<li id="addRecipe" class="vertical-navbar-component"><a href="/addRecipe" data-toggle="tooltip" title="Add Recipe" data-placement="right"><span class="glyphicon glyphicon-plus"></span></a></li>
+  		</ul>	
+
+
+	<div class="modal-fade" id="categoriesModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" data-target="#categoriesModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Categories</h4>
+				</div>
+				<div class="modal-body">
+					<ul>
+						<li>Appetizers</li>
+						<li>Main Dishes</li>
+						<li>Other</li>
+					</ul>
+				</div>
+		  </div>
+	  </div>	
+  </div>			  
+</template>

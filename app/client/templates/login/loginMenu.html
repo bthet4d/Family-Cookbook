@@ -1,0 +1,44 @@
+<template name="LoginMenu">
+{{#if currentUser}}
+	<li>
+		<a href="/">{{currentUser.profile.name}}</a>
+	</li>
+	<li>
+		<a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+		{{checkValue}}
+		<ul class="dropdown-menu">
+			<li>
+				<a id="allRecipes" href="/recipes">All Recipes</a>
+			</li>
+			<li>
+				<a id="MyFavorites" href="/recipes">Favorites</a>
+			</li>
+			<li>
+				<a id="addRecipe" href="/addRecipe">Add Recipe</a>
+			</li>
+		</ul>
+	</li>
+
+	<li class="dropdown">
+		<a href="" class="dropdown-toggle" data-toggle="dropdown">{{curentUser.login}}<span class="caret"></span></a>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="" data-action="logout">Logout</a>
+			</li>
+		</ul>
+	</li>
+
+{{else}}
+	{{#if loggingIn}}
+		<li class="active">
+			<a href="">Logging In...</a>
+		</li>
+	{{else}}
+		
+		<li class="active">
+			<a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+		</li>
+		
+	{{/if}}	
+{{/if}}
+</template>
