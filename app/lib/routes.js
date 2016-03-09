@@ -39,5 +39,9 @@ Router.route('/recipe/:recipeId', {
   name: 'viewRecipe',
   controller: 'ViewRecipeController',
   action: 'action',
-  where: 'client'
+  where: 'client',
+  data: function(){
+    var recipe = Recipes.findOne({_id: this.params.recipeId});
+    return recipe;
+  }
 });

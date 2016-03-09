@@ -9,14 +9,17 @@
 						{{else}}
 							{{> FavoritesButton self= getContext}}
 						{{/if}}
-						<div class="recipeItem" id="recipeTitle" data-id="{{_id}}">
-							<h4>{{getTitle}}</h4>
-						</div>
+						
 					</div>
 					
 				  	<div class="col-xs-6 recipe-column">
 				  	{{> DisplayImage recipeId = getId}}
 				  	</div>
+			  	</div>
+			  	<div class="row recipe-row">
+			  		<div class="recipeItem" id="recipeTitle" data-id="{{_id}}">
+							<h4>{{getTitle}}</h4>
+						</div>
 			  	</div>
 			  	<div class="row recipe-row">
 			  		<div class="recipe-data">
@@ -36,7 +39,7 @@
 					  	{{/if}}
 					  	<div class="recipeItem ingredientsList">
 					  		<h5>Ingredients:</h5>
-					  		<p>{{getIngredientsList}}</p>
+					  		<p>{{{getIngredientsList}}}</p>
 					  		
 					  	</div>
 				  	</div>

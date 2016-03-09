@@ -21,3 +21,4 @@ accounts-google
 cfs:standard-packages
 cfs:gridfs
 cfs:s3
+accounts-base

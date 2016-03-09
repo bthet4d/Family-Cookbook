@@ -1,21 +1,25 @@
 <template name="Recipes">
-  		<div class="row">
-			<div class="col-md-12">
-				<div class="row">
-					{{{getHeader}}}
-					{{#if hasRecipe}}
-						{{#each recipe}}
-							{{countRecipe}}
-							<div class="col-xs-6 col-md-4">
+{{#if Template.subscriptionsReady}}
+	<div class="row">
+		<div class="col-md-12">
+			{{{getHeader}}}
+				
+				{{#if hasRecipe}}
+					{{#each recipeRows}}
+					<div class="row">
+						{{#each recipeRow}}
+							<div class="col-sm-4">
 								{{>DisplayRecipe}}
 							</div>
 						{{/each}}
-					{{else}}
-						{{#if filterSet}}
-							<h3 class="filterby">No recipes found</h3>
-						{{/if}}
+					</div>
+					{{/each}}
+				{{else}}
+					{{#if filterSet}}
+						<h3 class="filterby">No recipes found</h3>
 					{{/if}}
-				</div>
-			</div>
+				{{/if}}
 		</div>
+	</div>
+{{/if}}
 </template>

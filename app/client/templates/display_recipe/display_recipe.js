@@ -105,13 +105,15 @@ Template.DisplayRecipe.helpers({
 	},
 	getIngredientsList: function(){
 		var ingList = '';
-		this.ingredients.forEach(function(ing, i){
+		for(var i = 0; i <= 5; i++){
 			if(i === 0){
-				ingList += ing.name;
+				ingList += this.ingredients[i].name;
 			}else{
-				ingList += ', ' + ing.name
+				ingList += ', ' + this.ingredients[i].name;
 			}
-		});
+		}
+		//add link to view more
+		ingList += ', <a id="ingLink" href="recipe/' + this._id + '">more...</a>';
 		return ingList;
 	},
 	getAuthor: function(){

@@ -2,36 +2,55 @@
 <link href='http://fonts.googleapis.com/css?family=Fjord+One' rel='stylesheet' type='text/css'>
 	<div class="container">
 		{{> NavBar}}
-		<div class="row">
-			<!-- <div class="col-lg-12"> -->
+	</div>
+	
+	<div class="container-fluid">
+		
+		<div class="row row-container">
+			<div id="vertical-nav" class="col-sm-1">
+				{{> VerticalNav}}
+
+			</div>
+			<div id="page" class="col-sm-11">
 				
-			<!-- </div> -->
-		</div>
-		{{#if currentUser}}
-		<div class="row main">
-			<div class="col-sm-3 sidebar">
-
-				{{> yield 'images'}}
-				{{> yield 'browse'}}
-				<!-- conversations incomplete -->
-				<!-- {{> yield 'conversations'}} -->
-			</div>
-					
-			<div class="col-sm-9 content">
-				{{> yield}}
-			</div>
-		</div>
-
-		{{else}}
-			<div class="row">
-				<div class="recipe-logo">
-					<div class="image-container">
-						<img src="images/recipeLogo.png">
+				<div class="row">
+					<div class="login-modals">
+						{{>LoginModal}}
+				
+						{{>RegisterModal}}
 					</div>
 				</div>
-			</div>
 
-		{{/if}}
+				{{#if currentUser}}
+				<div class="row main">
+					<div class="col-sm-3 sidebar">
+
+						{{> yield 'images'}}
+						{{> yield 'browse'}}
+						<!-- conversations incomplete -->
+						<!-- {{> yield 'conversations'}} -->
+					</div>
+							
+					<div class="col-sm-9 content">
+						{{> yield}}
+					</div>
+				</div>
+
+				{{else}}
+				<div class="row">
+					{{{displayLoginError}}}				
+				</div>
+				<div class="row">
+					<div class="recipe-logo">
+						<div class="image-container">
+							<img src="images/recipeLogo.png">
+						</div>
+					</div>
+				</div>
+
+				{{/if}}
+			</div>
+		</div>
 	</div>
-	  		
+				
 </template>

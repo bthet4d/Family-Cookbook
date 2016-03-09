@@ -8,4 +8,5 @@ Meteor.methods({
    * '/app/items/insert': function (item) {
    * }
    */
+
 });

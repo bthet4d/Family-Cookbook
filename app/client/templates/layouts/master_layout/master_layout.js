@@ -3,7 +3,7 @@ Template.MasterLayout.helpers({
 
 	ingredient: function(){
 		return Ingredients.find();
-	},
+	}
 });
 
 Template.MasterLayout.events({

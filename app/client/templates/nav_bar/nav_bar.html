@@ -1,6 +1,5 @@
 <template name="NavBar">
- <nav class="navbar navbar-default">
- 	<div class="container-fluid">
+ <nav id="nav" class="navbar navbar-default navbar-fixed-top myNav">
  		<div class="row">
  			<div class="col-sm-4">
  				<a href="/" class="navbar-brand">Thetford Family Cookbook</a>
@@ -29,53 +28,6 @@
 		
  		
  		</div>
-		
- 	</div>
- </nav>
+	 </nav>
 
-</template>
-
-<template name="LoginMenu">
-{{#if currentUser}}
-	<li>
-		<a href="/">{{currentUser.profile.name}}</a>
-	</li>
-	<li>
-		<a href="" class="dropdown-toggle" data-toggle="dropdown">{{curentUser.login}}<span class="glyphicon glyphicon-menu-hamburger"></span></a>
-		<ul class="dropdown-menu">
-			<li>
-				<a id="allRecipes" href="/recipes">All Recipes</a>
-			</li>
-			<li>
-				<a id="MyFavorites" href="/recipes">Favorites</a>
-			</li>
-			<li>
-				<a id="addRecipe" href="/addRecipe">Add Recipe</a>
-			</li>
-		</ul>
-	</li>
-
-	<li class="dropdown">
-		<a href="" class="dropdown-toggle" data-toggle="dropdown">{{curentUser.login}}<span class="caret"></span></a>
-		<ul class="dropdown-menu">
-			<li>
-				<a href="" data-action="logout">Logout</a>
-			</li>
-		</ul>
-	</li>
-
-{{else}}
-	{{#if loggingIn}}
-		<li class="active">
-			<a href="">Logging In...</a>
-		</li>
-	{{else}}
-
-		{{#if isLoginServicesConfigured}}
-			<li class="active">
-				<a href="" data-action="login">Login with Facebook</a>
-			</li>
-		{{/if}}
-	{{/if}}	
-{{/if}}
 </template>

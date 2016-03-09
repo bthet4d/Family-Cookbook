@@ -1,3 +1,7 @@
+//note the regular account creation works with this completely
+//commented out, so try only setting AND returning data if the 
+//user.services.facebook object exists
+
 function getUserInfo(accessToken){
 	var result = HTTP.get("https://graph.facebook.com/me",{
 		headers:{
@@ -12,21 +16,27 @@ function getUserInfo(accessToken){
 }
 
 Accounts.onCreateUser(function(options, user){
-	user.profile = getUserInfo(user.services.facebook.accessToken);
-	user.name = user.profile.name;
-	user.email = user.profile.email;
+	var profile = options.profile;
+	if(profile){
+		user.profile = profile;
+	}
+
 	return user;
 });
 
-Accounts.onLogin(function(loginInfo){
-	var user = loginInfo.user;
-	var accessToken = user.services.facebook.accessToken;
-	var userInfo = getUserInfo(accessToken);
-	Meteor.users.update({_id: user._id}, {
-		$set: {
-			profile: userInfo,
-			name: userInfo.name,
-			email: userInfo.email
-		}
-	});
-});
+// Accounts.onLogin(function(loginInfo){
+// 	console.log(loginInfo);
+// 	return;
+// 	var user = loginInfo.user;
+// 	var userInfo = loginInfo.profile;
+	
+// 	Meteor.users.update({_id: user._id}, {
+// 	$set: {
+// 		profile: userInfo,
+// 		name: userInfo.name,
+// 		email: userInfo.email
+// 	}
+// });
+	
+	
+// });
