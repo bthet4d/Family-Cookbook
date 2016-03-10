@@ -19,14 +19,16 @@ Template.MasterLayout.events({
 		});
 	},
 	'submit [id="search-form"]': function(e){
-		e.preventDefault();		
+		e.preventDefault();	
 		var form = e.currentTarget;
 		var searchVal = form.elements['search-recipes'].value;
-			
+		//todo - route to recipes
 		Session.set('viewRecipes',{
 			collection: 'search',
 			searchVal: searchVal
 		});
+		Router.go('/recipes');
+
 	}
 
 

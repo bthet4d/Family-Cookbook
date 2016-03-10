@@ -84,11 +84,6 @@ Template.Recipes.helpers({
 	},
 	recipeRow: function(){
 		return this;
-	},
-	test: function(){
-		console.log('this in test function');
-		console.log(this);
-		//coressponds to a row
 	}
 
 });
