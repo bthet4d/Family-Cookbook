@@ -11,7 +11,6 @@ Template.CommentsList.events({
 		form.reset();
 	},
 	'click #loadComments': function(){
-		window.location.hash = 'comments';
 		commentLimit.set(commentLimit.get() + 5);
 	}
 });

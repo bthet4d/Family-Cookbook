@@ -24,8 +24,10 @@
 				{{#if currentUser}}
 				<div class="row main">
 					<div class="col-sm-3 sidebar">
-
-						{{> yield 'images'}}
+						<div class="recipe-image">
+							{{> yield 'images'}}
+						</div>
+						
 						{{> yield 'browse'}}
 						<!-- conversations incomplete -->
 						<!-- {{> yield 'conversations'}} -->

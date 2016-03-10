@@ -41,18 +41,19 @@
 		</div>
 		<hr class="divider">
 		<div class="recipeDirections">
-		<div class="recipeItem">
+		<div class="recipe-block">
 				<h3>Directions</h3>
 			</div>
 			<table id="directions">
 				{{#each getDirections}}
-					<tr id="step_{{step}}">
-						<td id="step">{{step}}.</td>
+					<tr class="recipe-step" id="step_{{step}}">
+						<td id="step"><span>{{step}}.</span></td>
 						<td id="task">{{task}}</td>
 					</tr>
 				{{/each}}
 			</table>
 		</div>
+		<hr class="divider">
 		
 	</div>
 		{{> CommentsList}}
