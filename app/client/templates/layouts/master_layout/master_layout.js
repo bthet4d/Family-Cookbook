@@ -3,6 +3,13 @@ Template.MasterLayout.helpers({
 
 	ingredient: function(){
 		return Ingredients.find();
+	},
+	recipePage: function(){
+		var recipeId = Router.current().params.recipeId;
+		if(recipeId){
+			return true;
+		}
+		return false;
 	}
 });
 

@@ -105,15 +105,28 @@ Template.DisplayRecipe.helpers({
 	},
 	getIngredientsList: function(){
 		var ingList = '';
-		for(var i = 0; i <= 5; i++){
+		var viewMore = '';
+		var listLength = 5;
+		console.log('get ingredients');
+		console.log(this.ingredients);
+		var numIngs = this.ingredients.length;
+		console.log('number of ingredients');
+		console.log(numIngs);
+
+		if(numIngs <= 5){
+			listLength = numIngs;
+		}else{
+			viewMore = ', <a id="ingLink" href="recipe/' + this._id + '">more...</a>';
+		}
+		for(var i = 0; i <= listLength; i++){
 			if(i === 0){
 				ingList += this.ingredients[i].name;
 			}else{
 				ingList += ', ' + this.ingredients[i].name;
 			}
 		}
-		//add link to view more
-		ingList += ', <a id="ingLink" href="recipe/' + this._id + '">more...</a>';
+		//if there are more ingredients, add link to view more
+		ingList += viewMore;
 		return ingList;
 	},
 	getAuthor: function(){

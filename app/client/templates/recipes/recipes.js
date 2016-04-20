@@ -149,6 +149,7 @@ Template.Recipes.created = function () {
 				]});
 			recipesToView.set(searchedRecipes);
 		}else if(Session.get('viewRecipes').collection === 'popular'){
+			header.set('Popular Recipes')
 			var popRecipes = PopularRecipes.find({}).fetch();
 			var ids = [];
 			popRecipes.forEach(function(recipe){

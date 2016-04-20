@@ -1,7 +1,7 @@
 <template name="DisplayRecipe">
 	{{#if Template.subscriptionsReady}}
 		<div class="display-recipe">
-				<div class="row recipe-row">
+				<div class="row recipe-row image-row">
 					<div class="col-xs-6 recipe-column">
 				
 						{{#if isFavorite}}
@@ -31,12 +31,12 @@
 								<h5>Takes:</h5> <p>{{prepTime}}</p>
 							</div>
 						{{/if}}
-						{{#if hasServings}}
+						<!-- {{#if hasServings}}
 					  	<div class="recipeItem" id="recipeServings">
 					  		<h5>Serves:</h5> 
 					  		<p>{{servings}}</p>
 					  	</div>
-					  	{{/if}}
+					  	{{/if}} -->
 					  	<div class="recipeItem ingredientsList">
 					  		<h5>Ingredients:</h5>
 					  		<p>{{{getIngredientsList}}}</p>

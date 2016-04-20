@@ -2,6 +2,21 @@
 /* DisplayImage: Event Handlers */
 /*****************************************************************************/
 Template.DisplayImage.events({
+	'change [id="uploadPhoto"]': function(e){
+		var files = event.target.files;
+		var recipeId = Router.current().params.recipeId;
+		for(var i = 0, ln = files.length; i < ln; i++){
+			files[i].recipeId = this._id;
+
+			Images.insert(files[i], function(error, fileObj){
+				if(error){
+					console.log(error);
+				}else{
+					Meteor.call('addPhoto', recipeId, fileObj._id);
+				}
+			});
+		}
+	}
 });
 
 /*****************************************************************************/
@@ -32,6 +47,7 @@ Template.DisplayImage.helpers({
 		return links;
 
 	}
+
 });
 
 /*****************************************************************************/
@@ -39,14 +55,14 @@ Template.DisplayImage.helpers({
 /*****************************************************************************/
 Template.DisplayImage.created = function () {
 	var instance = this;
-	var recipeId = Router.current().params.recipeId;
-	if(!recipeId){
-		recipeId = instance.data.recipeId;
+	instance.recipeId = Router.current().params.recipeId;
+	if(!instance.recipeId){
+		instance.recipeId = instance.data.recipeId;
 	}
-	instance.subscribe('RecipePhotos', recipeId);
+	instance.subscribe('RecipePhotos', instance.recipeId);
 	instance.subscribe('images');
 		
-	instance.photos = new ReactiveVar(RecipePhotos.find({recipeId: recipeId}));
+	instance.photos = new ReactiveVar(RecipePhotos.find({recipeId: instance.recipeId}));
 };
 
 Template.DisplayImage.rendered = function () {

@@ -2,6 +2,7 @@
 /* RecipePage: Event Handlers */
 /*****************************************************************************/
 Template.RecipePage.events({
+	
 });
 
 /*****************************************************************************/
@@ -18,7 +19,9 @@ Template.RecipePage.helpers({
 		return Template.instance().recipe.get().ingredients;
 	},
 	getDirections: function(){
-		return Template.instance().recipe.get().directions;
+		var directions = Template.instance().recipe.get().directions;
+		console.log(directions);
+		return directions;
 	},
 	recipeId: function(){
 		return Template.instance().recipe.get()._id;

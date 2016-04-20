@@ -28,6 +28,8 @@ Meteor.methods({
       }
    },
    'addOriginalRecipe': function(recipe){
+      console.log('recipe to add');
+      console.log(recipe);
       if(this.isSimulation){
          return;
       }
@@ -100,6 +102,7 @@ Meteor.methods({
       });
    },
    'addPhoto': function(recipeId, photoId){
+      console.log('add photo');
       RecipePhotos.insert({
          recipeId: recipeId,
          photoId: photoId,

@@ -5,27 +5,34 @@
 	postition: relative;
 	margin-bottom: 1em;
 	padding: 1em;
-	background-image: url('images/concrete_wall.png');
-	color: #121E24;
+	background-color: #66A3FF;
+	color: black;
 	border: solid;
 	border-width: thin;
 	border-color: #121E24;
 	border-radius: 10px;
-	min-height: 300px;
+	min-height: 400px;
 }
 
+.image-row{
+	min-height: 90px;
+}
 
+.recipeItem{
+}
 .recipeItem h4{
-	color: #FFFFFF;
+	margin-top: 0;
 }
 .recipeItem h5{
 	display: inline-block;
-	color: #FFFFFF;
 }
 .recipeItem p{
 	display: inline-block;
-	color: #FFFFFF;
 }
+
+.recipe-column{
+}
+
 .recipePhoto{
 	float: right;
 	text-align: center;
@@ -38,11 +45,11 @@
 	font-size: 5em;
 }
 
-.recipePhoto img{
-	
+.recipePhoto a img{
 }
 
 .uploadLabel{
+	font-size: 3em;
 	cursor: pointer;
 	display: block;
 	color: #FFFFFF;
@@ -55,12 +62,13 @@
 	height: 0;
 }
 
-.recipe-data{
-	 
+.recipe-data, #recipeTitle{
 	width: 80%;
 	margin-bottom: 2em;
 	margin-left: .5em;
 }
+
+
 
 #recipeAuthor{
 	margin-left: .2em;
@@ -71,11 +79,13 @@
 
 }
 
-.glyphicon-heart-empty{
+.recipe-column .glyphicon-heart-empty{
+	font-size: 1.5em;
 	color: #FFFFFF;
 }
 
-.glyphicon-heart{
+.recipe-column .glyphicon-heart{
+	font-size: 1.5em;
 	color: #FFCC66;
 }
 

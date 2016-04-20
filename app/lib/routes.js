@@ -45,3 +45,11 @@ Router.route('/recipe/:recipeId', {
     return recipe;
   }
 });
+
+Router.route('/tips', {
+  name: 'tips'
+});
+
+Router.route('/shoppingLists', {
+  name: 'shoppingLists'
+});
