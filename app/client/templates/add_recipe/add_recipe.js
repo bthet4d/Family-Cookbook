@@ -12,18 +12,14 @@ Template.AddRecipe.events({
 		var amount = $('#ingredient_amount').val();
 		var type = $('#ingredient_type').val();
 		var typeName = $('#ingredient_type').find(":selected").html();
-		
-		$('#ingredients_list tbody').append(
-			'<tr class="ingredient_item" draggable="true">'
-			+ '<td id="ingredient">' 
+		$('#ingredients_list').append(
+			'<li data-id="ingredient" class="list-group-item clearfix">'
 			+ '<span id="amount">' + amount + '</span>'
 			+ ' '
-			+ '<span id="type" val="' + type + '">' + typeName + '</span>'
+			+ '<span id="type" val"' + type + '">' + typeName + '</span>'
 			+ ' '
 			+ '<span id="name">' + ingredient + '</span>'
-			+ '</td>'
-			+ '<td class="removeItem"><span class="glyphicon glyphicon-minus"></span></td>'
-			+ '</tr>'
+			+ '</li>'
 		);
 		$('#ingredient_name').val('');
 		$('#ingredient_amount').val('');
@@ -32,12 +28,8 @@ Template.AddRecipe.events({
 		//remove the invalid entry class
 		$('#ingredient_name').removeClass('invalid-entry');
 		$('#ingredient_amount').removeClass('invalid-entry');
-		// ing = {
-		// 	name: name,
-		// 	amount: amount,
-			
-		// }
-		// ingredients.push(ing);
+		$('.sortable-ingredients').sortable('destroy');
+		$('.sortable-ingredients').sortable();
 	},
 
 	'click [name=add_step]':function(e){
@@ -48,18 +40,21 @@ Template.AddRecipe.events({
 		var task = $("#directions_step").val();
 		
 		$("#directionsTable").append(
-			'<tr class="step">' 
-			+ '<td id="task">' + task + '</td>'
-			+ '<td class="removeItem"><span class="glyphicon glyphicon-minus" data-step="' + currentStep + '"></span></td>'
-			+ '</tr>'
+
+			'<li class="list-group-item clearfix">'
+			+ task
+			+ '<span class="glyphicon glyphicon-minus" data-step="' + currentStep + '"><span>'
+			+ '</li>'
 			);
 		
 		$("#directions_step").val('');
 		//remove invalid entry class
 		$('#directions_step').removeClass('invalid-entry');
 		//increment step number
-		var nextStep = Template.instance().step.get() + 1;
-		Template.instance().step.set(nextStep);
+		Template.instance().step.set(Template.instance().step.get() + 1);
+		$('.sortable-directions').sortable('destroy');
+		$('.sortable-directions').sortable();
+
 	},
 
 	'click [name=submitRecipe]':function(e){
@@ -136,24 +131,17 @@ Template.AddRecipe.events({
 			var amount = '';
 			$(this).find('td').each(function(){
 				$(this).find('span').each(function(){
-					console.log('this');
-					console.log(this);
 					var id = (this).getAttribute('id');
-					console.log('id');
-					console.log(id);
 					if(id === 'name'){
 						name = $(this).context.innerHTML.toLowerCase();
 					}else if(id === 'amount'){
 						amount = $(this).context.innerHTML;
-					}else if(id == "type"){
-						type = $(this).context.innerHTML;
 					}
 				});
 			});
 			var ing = {
 				name: name,
-				amount: amount,
-				type: type
+				amount: amount
 			}
 			ingredients.push(ing);
 		});
@@ -177,57 +165,21 @@ Template.AddRecipe.events({
 			// 	var similarIngredients = Ingredients.find({name: new RegExp(ingToAdd)}).fetch();
 			// 	Meteor.call('insertIngredient', ingToAdd);
 			// }
-			console.log('recipe');
-			console.log(recipe);
-			validForm = false;
+		validForm = false;
 			if(validForm){
 				Meteor.call('addOriginalRecipe', recipe);
 			}
 			
 	},
 
-	'click [class="removeItem"]': function(e){
+	'click [class="removeTask"]': function(e){
 		//todo - reset the counts in the list....is this possible?????
 		e.preventDefault();
-		var currentTarget = $(e.currentTarget);
-		currentTarget.parent().remove();
+		$(e.currentTarget).parent().parent().remove();
 	},
 	'change [class="form-control invalid-entry"]': function(e){
 		$(e.currentTarget).removeClass('invalid-entry');
-	},
-	'ondragover [name="ingredient-dropzone"]': function(e){
-		e.preventDefault();
-		console.log('drag over');
-	},
-	'ondrag [class="ingredient_item"]': function(e){
-		e.preventDefault();
-		console.log('drag');
-	},
-	'ondrop [class="ingredient-drop"]': function(e){
-		e.preventDefault();
-		console.log('drop event');
-	},
-	'ondragenter [class="ingredient-drop"]': function(e){
-		e.preventDefault();
-		console.log('drag enter');
-	},
-	'ondragleave [class="ingredient-drop"]': function(e){
-		e.preventDefault();
-		console.log('drag leave');
-	},
-
-
-
-
-// 	$('.drop').on('drop dragdrop',function(){
-//     alert('dropped');
-// });
-// $('.drop').on('dragenter',function(){
-//     $(this).html('drop now').css('background','blue');
-// })
-// $('.drop').on('dragleave',function(){
-//     $(this).html('drop here').css('background','red');
-// })
+	}
 });
 
 /*****************************************************************************/
@@ -253,11 +205,7 @@ Template.AddRecipe.helpers({
 	},
 	getMeasurementType: function(){
 		return this.measurements;
-	},
-	'ingredientDropHandler': function(e){
-		e.preventDefault();
-		console.log('drop handler');
-	},
+	}
 });
 
 /*****************************************************************************/
