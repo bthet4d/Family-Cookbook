@@ -35,17 +35,24 @@ Template.AddRecipe.events({
 	'click [name=add_step]':function(e){
 		e.preventDefault();
 		//add step to the directions list
-		
-		var currentStep = Template.instance().step.get();
-		var task = $("#directions_step").val();
-		
-		$("#directionsTable").append(
 
-			'<li class="list-group-item clearfix">'
-			+ task
-			+ '<span class="glyphicon glyphicon-minus" data-step="' + currentStep + '"><span>'
-			+ '</li>'
-			);
+		var task = $("#directions_step").val();
+		var newDirections = Template.instance().directions.get();
+
+		var len = newDirections.push({'task': task});
+		console.log('length');
+		console.log(len);
+		var index = 0;
+		while(index < len){
+			console.log('directions');
+			console.log(newDirections[index]);
+			newDirections[index]['stepCount'] = index + 1;
+			index++;
+		}
+		//Template.instance().directions.set([]);
+		console.log('new directions');
+		console.log(newDirections);
+		Template.instance().directions.set(newDirections);
 		
 		$("#directions_step").val('');
 		//remove invalid entry class
@@ -172,10 +179,26 @@ Template.AddRecipe.events({
 			
 	},
 
-	'click [class="removeTask"]': function(e){
+	'click [name="removeTask"]': function(e){
+
 		//todo - reset the counts in the list....is this possible?????
 		e.preventDefault();
-		$(e.currentTarget).parent().parent().remove();
+		//remove the list item containing the span
+		$(e.currentTarget).parent().remove();
+
+		//todo also remove this from the reactive var
+
+		var stepToRemove = e.currentTarget.dataset.step - 1;
+		var currentDirections = Template.instance().directions.get();
+		console.log(currentDirections);
+		currentDirections.forEach(function(index, task){
+			console.log(index);
+			console.log(task);
+			if(index === stepToRemove){
+				currentDirections.splice(stepToRemove, 1);
+			}
+		});
+
 	},
 	'change [class="form-control invalid-entry"]': function(e){
 		$(e.currentTarget).removeClass('invalid-entry');
@@ -205,6 +228,45 @@ Template.AddRecipe.helpers({
 	},
 	getMeasurementType: function(){
 		return this.measurements;
+	},
+	clearList: function(){
+
+		var directionsArray = Template.instance().directions.get();
+		var directionsList = document.getElementById('directionsTable');
+
+
+		if(directionsList){
+			var listItems = directionsList.getElementsByTagName('li');
+			if(listItems){
+				//console.log('list items');
+				//console.log(typeof listItems);
+				for(var i = 0; i <= listItems.length; i++){
+					//var li = listItems.item(i);
+					//console.log('list item');
+					//console.log(li);
+					//console.log(i);
+				}
+			}
+		}
+	},
+	getDirections: function(){
+		var directionsArray = Template.instance().directions.get();
+		//directionsArray.forEach(function(task, index){
+        //
+        //
+		//	var currentStep = index + 1;
+		//	$("#directionsTable").append(
+        //
+		//		'<li class="list-group-item clearfix">'
+		//		+ '<span class="stepNumber">' + currentStep + '.</span>'
+		//		+ task
+		//		+ '<span name="removeTask" class="glyphicon glyphicon-minus" data-step="' + currentStep + '"><span>'
+		//		+ '</li>'
+		//		);
+		//});
+		return directionsArray;
+	}, displayDirection: function(){
+		//console.log(this);
 	}
 });
 
@@ -213,6 +275,7 @@ Template.AddRecipe.helpers({
 /*****************************************************************************/
 Template.AddRecipe.created = function () {
 	var instance = this;
+	instance.directions = new ReactiveVar([]);
 	instance.step = new ReactiveVar(1);
 	instance.subscribe('ingredients');
 };

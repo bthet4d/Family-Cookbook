@@ -72,7 +72,9 @@
 
 						<div id="directionsList">
 							<ul id="directionsTable" class="list-group sortable-directions recipe-table" >
-							
+								{{#each getDirections}}
+									{{displayDirection}}
+								{{/each}}
 							</ul>
 						</div>
 						
