@@ -72,8 +72,14 @@
 
 						<div id="directionsList">
 							<ul id="directionsTable" class="list-group sortable-directions recipe-table" >
+								<!-- {{clearList}} -->
 								{{#each getDirections}}
 									{{displayDirection}}
+									<!-- <li class="list-group-item clearfix">
+									<span class="stepNumber">{{index}}.</span>
+									{{task}}
+									<span name="removeTask" class="glyphicon glyphicon-minus" data-step="{{index}}"></span>
+									</li> -->
 								{{/each}}
 							</ul>
 						</div>

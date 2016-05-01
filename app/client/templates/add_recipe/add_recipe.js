@@ -33,32 +33,26 @@ Template.AddRecipe.events({
 	},
 
 	'click [name=add_step]':function(e){
+		console.log('adding step');
+		clearList();
+		
 		e.preventDefault();
 		//add step to the directions list
 
 		var task = $("#directions_step").val();
 		var newDirections = Template.instance().directions.get();
 
-		var len = newDirections.push({'task': task});
-		console.log('length');
-		console.log(len);
-		var index = 0;
-		while(index < len){
-			console.log('directions');
-			console.log(newDirections[index]);
-			newDirections[index]['stepCount'] = index + 1;
-			index++;
-		}
+		newDirections.push(task);
+		
+		
 		//Template.instance().directions.set([]);
-		console.log('new directions');
-		console.log(newDirections);
 		Template.instance().directions.set(newDirections);
 		
 		$("#directions_step").val('');
 		//remove invalid entry class
 		$('#directions_step').removeClass('invalid-entry');
 		//increment step number
-		Template.instance().step.set(Template.instance().step.get() + 1);
+		// Template.instance().step.set(Template.instance().step.get() + 1);
 		$('.sortable-directions').sortable('destroy');
 		$('.sortable-directions').sortable();
 
@@ -180,24 +174,28 @@ Template.AddRecipe.events({
 	},
 
 	'click [name="removeTask"]': function(e){
-
 		//todo - reset the counts in the list....is this possible?????
 		e.preventDefault();
+		clearList();
 		//remove the list item containing the span
-		$(e.currentTarget).parent().remove();
+		// $(e.currentTarget).parent().remove();
 
 		//todo also remove this from the reactive var
 
-		var stepToRemove = e.currentTarget.dataset.step - 1;
+		var stepToRemove = e.currentTarget.dataset.step;
 		var currentDirections = Template.instance().directions.get();
-		console.log(currentDirections);
-		currentDirections.forEach(function(index, task){
-			console.log(index);
-			console.log(task);
-			if(index === stepToRemove){
-				currentDirections.splice(stepToRemove, 1);
+		
+		currentDirections.forEach(function(task, index){
+			if(index + 1 == stepToRemove){
+				console.log('removing task');
+				console.log(task);
+				currentDirections.splice(index, 1);
 			}
 		});
+		Template.instance().directions.set(currentDirections);
+		
+		$('.sortable-directions').sortable('destroy');
+		$('.sortable-directions').sortable();
 
 	},
 	'change [class="form-control invalid-entry"]': function(e){
@@ -230,43 +228,30 @@ Template.AddRecipe.helpers({
 		return this.measurements;
 	},
 	clearList: function(){
-
-		var directionsArray = Template.instance().directions.get();
-		var directionsList = document.getElementById('directionsTable');
-
-
-		if(directionsList){
-			var listItems = directionsList.getElementsByTagName('li');
-			if(listItems){
-				//console.log('list items');
-				//console.log(typeof listItems);
-				for(var i = 0; i <= listItems.length; i++){
-					//var li = listItems.item(i);
-					//console.log('list item');
-					//console.log(li);
-					//console.log(i);
-				}
-			}
-		}
+		console.log('clearing list');
+		$('#directionsTable').empty();
 	},
 	getDirections: function(){
 		var directionsArray = Template.instance().directions.get();
-		//directionsArray.forEach(function(task, index){
-        //
-        //
-		//	var currentStep = index + 1;
-		//	$("#directionsTable").append(
-        //
-		//		'<li class="list-group-item clearfix">'
-		//		+ '<span class="stepNumber">' + currentStep + '.</span>'
-		//		+ task
-		//		+ '<span name="removeTask" class="glyphicon glyphicon-minus" data-step="' + currentStep + '"><span>'
-		//		+ '</li>'
-		//		);
-		//});
-		return directionsArray;
+		var newArray = _.map(directionsArray, function(value, index){
+			return {task: value, index: index + 1};
+		});
+		console.log('directions array');
+		console.log(newArray);
+		return newArray;
 	}, displayDirection: function(){
-		//console.log(this);
+		console.log('display direction');
+		console.log(this);
+		// console.log('this');
+		// console.log(this);
+		$("#directionsTable").append(
+        
+				'<li class="list-group-item clearfix">'
+				+ '<span class="stepNumber">'+ this.index + '.</span>'
+				+ this.task
+				+ '<span name="removeTask" class="glyphicon glyphicon-minus" data-step="' + this.index + '"><span>'
+				+ '</li>'
+				);
 	}
 });
 
@@ -285,3 +270,14 @@ Template.AddRecipe.rendered = function () {
 
 Template.AddRecipe.destroyed = function () {
 };
+
+var clearList = function(){
+	console.log('clear list');
+	var directionsList = document.getElementById('directionsTable');
+		var list = directionsList.getElementsByTagName('li');
+		for(var i = 0; i < list.length; i++){
+			console.log('list item');
+			console.log(list[i]);
+			$(list[i]).remove();
+		}
+}
