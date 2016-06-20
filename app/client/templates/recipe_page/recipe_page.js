@@ -16,11 +16,11 @@ Template.RecipePage.helpers({
 		return Template.instance().recipe.get().title;
 	},
 	ingredient: function(){
-		return Template.instance().recipe.get().ingredients;
+		var ingredients = Template.instance().recipe.get().ingredients
+		return ingredients;
 	},
 	getDirections: function(){
 		var directions = Template.instance().recipe.get().directions;
-		console.log(directions);
 		return directions;
 	},
 	recipeId: function(){
@@ -39,6 +39,13 @@ Template.RecipePage.helpers({
 	hasServings: function(){
 
 		return false;
+	},
+	hasType:function(){
+		if(this.type){
+			return true;
+		}else{
+			return false;
+		}
 	}
 });
 

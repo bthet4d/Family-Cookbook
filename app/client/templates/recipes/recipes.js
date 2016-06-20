@@ -36,7 +36,6 @@ Template.Recipes.helpers({
 	newRow: function(){
 		var newRow = false
 		var mod = recipeCount % 3;
-		// console.log(recipeCount + ' divided by 3 - remainder = ' + mod );
 		if(recipeCount !== 0 && recipeCount % 3 === 0){
 			newRow = true;
 		}
@@ -54,7 +53,6 @@ Template.Recipes.helpers({
 	isLast: function(){
 		var recipesLength = recipesToView.get().fetch().length;
 		if(recipesLength === recipeCount && recipesLength >= 3){
-			console.log('is last');
 			return true;
 		}
 		return false;

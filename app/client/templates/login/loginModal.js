@@ -33,8 +33,7 @@ Template.LoginModal.events({
 				}, 2000);
 				
 			}else{
-				console.log('login successful, hide modal');
-
+				//successful, hide modal
 			}
 		});
 		return false;

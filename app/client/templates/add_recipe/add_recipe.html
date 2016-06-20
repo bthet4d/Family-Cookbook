@@ -45,6 +45,7 @@
 				<div class="form-data right">
 					<label for="ingredient_type">Type</label>
 						<select id="ingredient_type" class="form-control">
+							<option name="emptyOption" selected value="0"> -- select a type --</option>
 							{{#each getMeasurements}}
 								<optgroup label="{{type}}"></optgroup>
 								{{#each getMeasurementType}}
@@ -58,30 +59,30 @@
 				<input id="ingredient_name" type="text" class="form-control listed" placeholder="Ingredient Name">
 				<span id="add_ingredient" name="add_ingredient" class="glyphicon glyphicon-plus-sign"></span>					
 				<div id="ingredientsList" class="form-group">
-						<ul id="ingredients_list" class="list-group sortable-ingredients recipe-table">
+						<ul id="ingredients_list" class="list-group recipe-table">
 									
 						</ul>
 				</div>
 			</div>
 			
 			<div class="form-group">
+			<!-- The Modal -->
 				<h3>Directions</h3>
 				<div class="form-group directions">
-						<input type="text" id="directions_step" class="form-control listed" placeholder="Add a step"/>
-						<span id="add_step" name="add_step" class="glyphicon glyphicon-plus-sign"></span>	
+						<input type="text" id="directions_step" name="directions_step" class="form-control listed" placeholder="Add a step"/>
+						<span id="add_step" name="add_step" class="glyphicon glyphicon-plus-sign"></span>
+						<div class="recipeFormater">
+							<button id="addDegree">
+								<span class="recipeSymbol">&deg; </span>
+
+							</button>
+						</div>
+						
 
 						<div id="directionsList">
-							<ul id="directionsTable" class="list-group sortable-directions recipe-table" >
-								<!-- {{clearList}} -->
-								{{#each getDirections}}
-									{{displayDirection}}
-									<!-- <li class="list-group-item clearfix">
-									<span class="stepNumber">{{index}}.</span>
-									{{task}}
-									<span name="removeTask" class="glyphicon glyphicon-minus" data-step="{{index}}"></span>
-									</li> -->
-								{{/each}}
-							</ul>
+							<ol id="directionsTable" type="1" class="list-group sortable-directions recipe-table" >
+								
+							</ol>
 						</div>
 						
 				</div>
@@ -93,6 +94,28 @@
 			</form>
 
 			<!-- add seperate from for ingredients, with a text input for name and a slector for measurements and type for rest -->
-			
+
+			<div id="degreeModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						
+						<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						
+						</div>
+						
+						<div class="modal-body">
+							<div id="ovenForm">
+								<p>If using an oven, enter the temperature here.</p>
+								<input type="text" id="tempDegree" name="degree" placeholder="Enter farenheit temperature">
+								<button id="confirmTemp">Set temp.</button>
+								<button id="close">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 </template>

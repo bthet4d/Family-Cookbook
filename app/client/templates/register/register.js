@@ -55,12 +55,10 @@ Template.Register.events({
 	},
 	'click #logInWithFacebook': function(e){
 		e.preventDefault();
-		console.log('!!! logging in with facebook !!!');
 	},
 
 	'click .close': function(e){
 		e.preventDefault();
-		console.log('close the damn modal');
 		$('#loginModal').modal('hide');
 	}
 });
@@ -70,7 +68,6 @@ Template.Register.events({
 /*****************************************************************************/
 Template.Register.helpers({
 	'getUser': function(){
-		console.log(Meteor.userId());
 	}
 });
 

@@ -17,7 +17,6 @@ Template.RegisterModal.events({
 			//hide the register modal
 			$('#register-modal').modal('hide');
 			//create account
-			console.log('create account');
 			//build user object
 			var user = {
 				password: reg_pass,
@@ -31,8 +30,6 @@ Template.RegisterModal.events({
 			Accounts.createUser(user, function(error){
 				if(error){
 					//set session var to the error reason
-					console.log('error');
-					console.log(error);
 					Session.set('loginMessage', error.reason);
 				}else{
 					console.log('success');
@@ -103,22 +100,16 @@ var trimInput = function(input){
 var isValidPassword = function(password){
 	var validMessage = 'Passwords must contain letters and numbers, be at least six characters long and less than 50.';
 	var isValid = true;
-	if(password.length < 6){
-		console.log('password too short');
-		
+	if(password.length < 6){		
 		isValid = false;
-
 	}
 	if(password.length > 50){
-		console.log('password too long');
 		isValid = false;
 	}
 	if(password.search(/\d/) == -1){
-		console.log('no numbers');
 		isValid = false;
 	}
 	if(password.search(/[a-zA-Z]/) == -1){
-		console.log('no letters');
 		isValid = false;
 	}
 	return isValid;

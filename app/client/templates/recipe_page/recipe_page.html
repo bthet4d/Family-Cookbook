@@ -30,7 +30,12 @@
 			</div>
 				{{#each ingredient}}
 					<p>
+						{{#if hasType}}
+							<span class="ingredient-listing"> {{amount}} {{type}} </span>
+						{{else}}
 						<span class="ingredient-listing">{{amount}}</span>
+
+						{{/if}}
 						<span class="ingredient-listing">{{measurement}}</span>
 						<span class="ingredient-listing">{{name}}</span>
 					</p>

@@ -7,8 +7,6 @@ Meteor.methods({
 		return tempArray.join(' ');
 	},'trimInput': function(val){
     	var trimmed = val.replace(/^\s*|\s*$/g, "");
-    	console.log('validated');
-    	console.log(trimmed);
     	return trimmed;
     }
 
